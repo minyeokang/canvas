@@ -9,12 +9,32 @@ window.addEventListener("resize", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
-ctx.fillStyle = "white";
-//ctx.strokeStyle= 'red';
-//ctx.innerWidth = 5;
-ctx.beginPath();
-ctx.arc(100, 100, 50, 0, Math.PI * 2);
-ctx.fill();
-//ctx.stroke();
-//ctx.fillStyle = "white";
-//ctx.fillRect(10, 20, 150, 50);
+
+//let"s make it interactive
+const mouse = {
+  x: undefined,
+  y: undefined,
+};
+canvas.addEventListener("click", function (event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+});
+
+canvas.addEventListener("mousemove", function (event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+});
+
+function drawCircle() {
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawCircle();
+  requestAnimationFrame(animate);
+}
+animate();
