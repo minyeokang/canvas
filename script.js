@@ -18,6 +18,9 @@ const mouse = {
 canvas.addEventListener("click", function (event) {
   mouse.x = event.x;
   mouse.y = event.y;
+  for (let i = 0; i < 10; i++) {
+    particlesArray.push(new Particle());
+  }
 });
 
 canvas.addEventListener("mousemove", function (event) {
@@ -27,10 +30,10 @@ canvas.addEventListener("mousemove", function (event) {
 
 class Particle {
   constructor() {
-    //this.x = mouse.x;
-    //this.y = mouse.y;
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
+    this.x = mouse.x;
+    this.y = mouse.y;
+    //this.x = Math.random() * canvas.width;
+    //this.y = Math.random() * canvas.height;
     this.size = Math.random() * 15 + 1;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
@@ -46,13 +49,6 @@ class Particle {
     ctx.fill();
   }
 }
-
-function init() {
-  for (let i = 0; i < 100; i++) {
-    particlesArray.push(new Particle());
-  }
-}
-init();
 
 function handleParticles() {
   for (let i = 0; i < particlesArray.length; i++) {
